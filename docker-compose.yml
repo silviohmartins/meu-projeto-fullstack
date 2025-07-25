@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # Serviço do Banco de Dados PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: login_db_container
+    environment:
+      POSTGRES_USER: login_user
+      POSTGRES_PASSWORD: '@Motucacity2328' # Troque pela sua senha
+      POSTGRES_DB: login_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Serviço do Backend Java
+  backend:
+    container_name: login_backend_container
+    build: ./login-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/login_db
+      SPRING_DATASOURCE_USERNAME: login_user
+      SPRING_DATASOURCE_PASSWORD: '@Motucacity2328' # Use a mesma senha de cima
+    depends_on:
+      - db
+
+  # Serviço do Frontend Nginx
+  frontend:
+    container_name: login_frontend_container
+    build: ./login-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
