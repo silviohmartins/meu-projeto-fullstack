@@ -14,7 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-
 import java.util.List;
 
 @RestController
@@ -43,7 +42,7 @@ public class TarefaController {
     // READ - Listar todas as tarefas do usuário logado
     @GetMapping
     public ResponseEntity<List<Tarefa>> listarTarefasDoUsuario(@AuthenticationPrincipal Usuario usuario) {
-        List<Tarefa> tarefas = tarefaRepository.findByUsuario(usuario);
+        List<Tarefa> tarefas = tarefaService.listarTarefasDoUsuario(usuario);
         return ResponseEntity.ok(tarefas);
     }
 

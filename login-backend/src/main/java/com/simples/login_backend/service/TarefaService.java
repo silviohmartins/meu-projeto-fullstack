@@ -6,6 +6,8 @@ import com.simples.login_backend.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TarefaService {
 
@@ -24,5 +26,10 @@ public class TarefaService {
         novaTarefa.setUsuario(usuario);
 
         return tarefaRepository.save(novaTarefa);
+
+        @Transactional(readOnly = true) // Garante que a sessão com o banco fica aberta
+        public List<Tarefa> listarTarefasDoUsuario(Usuario usuario) {
+            return tarefaRepository.findByUsuario(usuario);
+        }
     }
 }
