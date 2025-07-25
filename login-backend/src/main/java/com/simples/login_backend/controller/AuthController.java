@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "https://login-frontend-0jio.onrender.com", allowedHeaders = "https://login-frontend-0jio.onrender.com") // Permite acesso de qualquer origem
 public class AuthController {
 
     @Autowired
