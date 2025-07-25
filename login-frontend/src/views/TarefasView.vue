@@ -35,7 +35,7 @@ const toast = useToast()
 const tarefas = ref([])
 const novaTarefa = ref({ titulo: '', descricao: '' })
 
-const API_URL = 'http://localhost:8080/api/tarefas'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
 // READ
 async function fetchTarefas() {

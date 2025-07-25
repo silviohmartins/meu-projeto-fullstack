@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tarefas")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "https://login-frontend-0jio.onrender.com", allowedHeaders = "https://login-frontend-0jio.onrender.com")
 public class TarefaController {
 
     @Autowired

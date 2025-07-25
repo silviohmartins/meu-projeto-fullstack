@@ -4,7 +4,7 @@ import axios from 'axios'
 import router from '@/router'
 
 // URL base da API (criaremos um endpoint /users)
-const API_BASE_URL = 'http://localhost:8080/api'
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
 export const useAuthStore = defineStore('auth', () => {
   // STATE

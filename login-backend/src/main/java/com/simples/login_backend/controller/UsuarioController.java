@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "https://login-frontend-0jio.onrender.com", allowedHeaders = "https://login-frontend-0jio.onrender.com")
 public class UsuarioController {
 
     @GetMapping("/me")
