@@ -7,15 +7,14 @@ const toast = useToast()
 const tarefas = ref([])
 const novaTarefa = ref({ titulo: '', descricao: '' })
 
-// Corrigido: Define a URL base a partir das variáveis de ambiente
+// A URL base da API
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
-// Corrigido: Cria uma URL completa e específica para o endpoint de tarefas
+// A URL completa e específica para o endpoint de tarefas
 const TAREFAS_API_URL = `${API_BASE_URL}/tarefas`;
 
 // READ
 async function fetchTarefas() {
   try {
-    // Corrigido: Usa a nova variável
     const response = await axios.get(TAREFAS_API_URL)
     tarefas.value = response.data
   } catch (error) {
@@ -28,10 +27,9 @@ async function fetchTarefas() {
 async function addTarefa() {
   if (!novaTarefa.value.titulo.trim()) return
   try {
-    // Corrigido: Usa a nova variável
     const response = await axios.post(TAREFAS_API_URL, novaTarefa.value)
     tarefas.value.push(response.data)
-    novaTarefa.value = { titulo: '', descricao: '' }
+    novaTarefa.value = { titulo: '', descricao: '' } // Limpa o formulário
     toast.success('Tarefa adicionada!')
   } catch (error) {
     toast.error('Erro ao adicionar tarefa.')
@@ -42,8 +40,8 @@ async function addTarefa() {
 // UPDATE
 async function toggleConcluida(id) {
   try {
-    // Corrigido: Usa a nova variável
     await axios.put(`${TAREFAS_API_URL}/${id}`)
+    // Atualiza a lista localmente para refletir a mudança
     const tarefa = tarefas.value.find((t) => t.id === id)
     if (tarefa) {
       tarefa.concluida = !tarefa.concluida
@@ -57,8 +55,8 @@ async function toggleConcluida(id) {
 // DELETE
 async function deleteTarefa(id) {
   try {
-    // Corrigido: Usa a nova variável
     await axios.delete(`${TAREFAS_API_URL}/${id}`)
+    // Remove a tarefa da lista local
     tarefas.value = tarefas.value.filter((t) => t.id !== id)
     toast.success('Tarefa apagada.')
   } catch (error) {
